@@ -91,3 +91,15 @@ media/generated/
 # Neural controller training scratch: checkpoints, logs, intermediate models.
 # The published model goes to Hugging Face and to web/public/models/.
 training/out/
+
+# Greenlight: Barcelona's recorded twin ships in the repository, so Vercel can
+# build the site from Git alone (MainstreetAi keeps these out and has no scene).
+!web/public/replay/
+!web/public/data/roads.geojson
+!web/public/data/signals.geojson
+!web/public/data/signal_approaches.geojson
+!web/public/data/buildings.geojson
+!web/public/data/bike_lanes.geojson
+!web/public/data/transit.geojson
+!web/public/data/basemap_barcelona.json
+!web/public/data/basemap_barcelona.png

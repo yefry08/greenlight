@@ -228,18 +228,19 @@ export default function Landing({ onTab }) {
     <div className="land">
       <section className="land-hero">
         <div className="land-hero-text">
-          <p className="land-eyebrow">{tr('Open data · AI for climate · Latin America',
-                                          'Datos abiertos · IA para el clima · América Latina')}</p>
-          <h1>{tr('Real streets. Open data.', 'Calles reales. Datos abiertos.')}<br />
-              {tr('Cleaner cities.', 'Ciudades más limpias.')}</h1>
+          <p className="land-eyebrow">{tr('GenAI for Good Challenge · Pristina · open source', null,
+                                          'GenAI for Good Challenge · Prishtinë · burim i hapur')}</p>
+          <h1>{tr('Every bus route,', null, 'Çdo linjë autobusi,')}<br />
+              {tr('with its evidence attached.', null, 'me dëshmitë e saj.')}</h1>
           <p className="land-lede">
-            {tr('MainstreetAi turns open data on Latin America’s cities into evidence for climate action: traffic lights timed by AI and the CO₂ they save, where to plant street trees and build bike lanes, and who lives too far from a bus. Every figure is measured on real streets and linked to its source.',
-                'MainstreetAi convierte los datos abiertos de las ciudades de América Latina en evidencia para la acción climática: semáforos programados por IA y el CO₂ que ahorran, dónde plantar árboles y hacer ciclovías, y quién vive demasiado lejos de un bus. Cada cifra se mide sobre calles reales y enlaza a su fuente.')}
+            {tr('Greenlight AI helps Pristina’s mobility planners review bus routes faster. It brings homes, stops, routes and traffic into one map, flags the neighbourhoods a route may no longer serve, and answers planners’ questions in Albanian, Serbian or English — every claim cited, nothing recommended. Planners decide.',
+                null,
+                'Greenlight AI i ndihmon planifikuesit e lëvizshmërisë në Prishtinë të rishikojnë më shpejt linjat e autobusëve. Bashkon banesat, stacionet, linjat dhe trafikun në një hartë, shënon lagjet që një linjë mund të mos i shërbejë më, dhe u përgjigjet pyetjeve të planifikuesve në shqip, serbisht ose anglisht — çdo pohim me burim, asnjë rekomandim. Vendimin e marrin planifikuesit.')}
           </p>
           <div className="land-cta">
-            <button className="land-btn primary" onClick={() => onTab('yours')}>{tr('Try your city', 'Prueba tu ciudad')}</button>
-            <button className="land-btn" onClick={() => onTab('green')}>{tr('Trees and bike lanes', 'Árboles y ciclovías')}</button>
-            <button className="land-btn ghost" onClick={() => onTab('transit')}>{tr('Bus coverage', 'Cobertura de bus')}</button>
+            <button className="land-btn primary" onClick={() => onTab('transit')}>{tr('Open Pristina’s route review', null, 'Hap rishikimin e linjave të Prishtinës')}</button>
+            <button className="land-btn" onClick={() => onTab('home')}>{tr('Watch Barcelona’s twin', null, 'Shiko binjakun e Barcelonës')}</button>
+            <button className="land-btn ghost" onClick={() => onTab('how')}>{tr('How it works', null, 'Si funksionon')}</button>
           </div>
         </div>
         <figure className="land-hero-city">
@@ -252,10 +253,11 @@ export default function Landing({ onTab }) {
       </section>
 
       <section className="land-section">
-        <h2>{tr('Three tools, one map', 'Tres herramientas, un mapa')}</h2>
+        <h2>{tr('What is already working', null, 'Çfarë funksionon tashmë')}</h2>
         <p className="land-sub">
-          {tr('All built on open data, all free, all in your browser. No account and no key needed.',
-              'Todas con datos abiertos, gratis y en tu navegador. Sin cuenta y sin clave.')}
+          {tr('A public prototype on open data, built for the use case Pristina and UNDP defined. Municipal data is what it needs next.',
+              null,
+              'Një prototip publik me të dhëna të hapura, i ndërtuar për rastin e përdorimit që përcaktuan Prishtina dhe UNDP. Të dhënat komunale janë hapi i ardhshëm.')}
         </p>
         <div className="land-grid">
           {SCENE_CITIES.filter((c) => hasScene(c.scene)).map((c) => <CityCard key={c.key} city={c} onTab={onTab} />)}
@@ -285,7 +287,6 @@ export default function Landing({ onTab }) {
         </div>
       </section>
 
-      <CapitalsStrip />
 
       <section className="land-section">
         <h2>{tr('How it works', 'Cómo funciona')}</h2>

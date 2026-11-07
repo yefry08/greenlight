@@ -1,32 +1,32 @@
 /**
- * What this site is. One codebase serves two sites, which differ only here:
+ * What this site is. Greenlight AI shares its code with MainstreetAi
+ * (github.com/yefry08/MainstreetAi); the two differ only here:
  *
- *   MainstreetAi  (github.com/yefry08/MainstreetAi, GitHub Pages)
- *     Latin America: open data and AI for climate. Spanish and English; the
- *     61 Latin American cities; trees, bike lanes, transit and traffic.
  *   Greenlight AI (github.com/yefry08/greenlight, Vercel)
- *     The GenAI for Good Challenge (UNDP / IEEE): Pristina's transit use case,
- *     with Barcelona's recorded twin. English and Albanian.
+ *     The GenAI for Good Challenge: Cities Edition (UNDP / IEEE) -- Pristina's
+ *     Transit Route Planning use case, with Barcelona's recorded traffic twin.
+ *     English and Albanian.
+ *   MainstreetAi  (github.com/yefry08/MainstreetAi, GitHub Pages)
+ *     Latin America: open data and AI for climate. Spanish and English.
  *
  * Anything that would make one site show the other's content belongs in this
  * file, not in a component.
  */
-import { CITIES, regionOf } from './city/cities.js'
+import { CITIES, citySlug } from './city/cities.js'
+
+const ONLY = ['pristina', 'barcelona']
 
 export const SITE = {
-  name: 'MainstreetAi',
-  tagline: { en: 'Open data and AI for Latin America’s streets', es: 'Datos abiertos e IA para las calles de América Latina' },
-  langs: ['es', 'en'],
-  // The recorded SUMO scenes (Barcelona, Manhattan). Off here: this site is
-  // Latin America only.
-  scenes: [],
-  tabs: ['yours', 'green', 'transit', 'how', 'research', 'contact'],
-  // Which catalogue cities the site offers.
-  cities: (c) => regionOf(c) === 'Latin America',
-  // Languages the transit assistant offers example questions in.
-  askLangs: ['es', 'pt', 'en'],
-  // The city a tab opens on when none is named.
-  defaultCity: { transit: 'medellin', green: 'medellin' },
+  name: 'Greenlight AI',
+  tagline: { en: 'Evidence for Pristina’s bus routes', sq: 'Dëshmi për linjat e autobusëve të Prishtinës' },
+  langs: ['en', 'sq'],
+  // The recorded SUMO twin of Barcelona's Eixample.
+  scenes: ['barcelona'],
+  // 'home' is Barcelona's scene; listing it here places it in the menu.
+  tabs: ['transit', 'home', 'yours', 'how', 'research', 'contact'],
+  cities: (c) => ONLY.includes(citySlug(c)),
+  askLangs: ['sq', 'sr', 'en'],
+  defaultCity: { transit: 'pristina', green: 'pristina' },
 }
 
 export const SITE_CITIES = CITIES.filter(SITE.cities)

@@ -21,8 +21,12 @@ const ALL_TABS = [
   { key: 'research', label: 'Research', es: 'Investigación', sq: 'Kërkimi' },
   { key: 'contact', label: 'Contact', es: 'Contacto', sq: 'Kontakti' },
 ]
-// Only the tabs this site has (site.js).
-export const TABS = ALL_TABS.filter((t) => (t.scene ? hasScene(t.scene) : SITE.tabs.includes(t.key)))
+// Only the tabs this site has (site.js), in its order; a scene tab not named
+// in SITE.tabs goes first.
+const rank = (t) => (SITE.tabs.includes(t.key) ? SITE.tabs.indexOf(t.key) : -1)
+export const TABS = ALL_TABS
+  .filter((t) => (t.scene ? hasScene(t.scene) : SITE.tabs.includes(t.key)))
+  .sort((a, b) => rank(a) - rank(b))
 
 export default function Navbar({
   tab, onTab, mode, onMode, chrome, onChrome, lang = 'en', onLang,

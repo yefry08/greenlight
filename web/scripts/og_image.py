@@ -5,7 +5,7 @@ The link preview card: public/og.png, 1200 x 630.
 
 This is what WhatsApp, LinkedIn, Slack and X show when someone pastes a link
 to the site. Before it existed a shared link was a bare URL titled
-"MainstreetAi · Barcelona" -- the first impression the project made on anyone
+"Greenlight AI · Barcelona" -- the first impression the project made on anyone
 it was sent to.
 
 The figures on the card are READ from the same files the site reads -- the
@@ -95,7 +95,7 @@ def main():
     mono = ["consola.ttf"]
 
     d.rounded_rectangle([64, 60, 88, 84], radius=5, fill=ACCENT)
-    d.text((100, 56), "MainstreetAi", font=font(bold, 28), fill=INK)
+    d.text((100, 56), "Greenlight AI", font=font(bold, 28), fill=INK)
     d.text((64, 128), "ADAPTIVE TRAFFIC SIGNALS · REAL CITIES · DIGITAL TWINS",
            font=font(mono, 20), fill=ACCENT)
     title = font(bold, 64)

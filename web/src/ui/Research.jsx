@@ -85,7 +85,7 @@ export default function Research() {
             validated field. It is cited here as inspiration and context.
           </p>
           <p className="research-disclaimer glass">
-            <strong>None of this is used by MainstreetAi.</strong> This project runs
+            <strong>None of this is used by Greenlight AI.</strong> This project runs
             SUMO with a rule-based adaptive signal controller, and shares no code,
             models or technical architecture with the work below. These are
             references that shaped how the problem was framed — nothing more.
@@ -113,7 +113,7 @@ export default function Research() {
           <figcaption>
             <h3>AI Traffic Orchestration — Technical Pipeline</h3>
             <p>
-              MainstreetAi's own pipeline, as designed. Running today:
+              Greenlight AI's own pipeline, as designed. Running today:
               Barcelona, Shibuya and Midtown Manhattan have full SUMO networks
               and recorded twins — <b>+41.1%</b>, <b>+36.0%</b> and{' '}
               <b>+34.6%</b> network speed against fixed-time control. The
@@ -151,7 +151,7 @@ export default function Research() {
       </ul>
 
       <p className="research-foot">
-        MainstreetAi compares two SUMO simulations of Barcelona running identical
+        Greenlight AI compares two SUMO simulations of Barcelona running identical
         demand, differing only in who controls the traffic lights. The agent work
         above informs how that question is framed; it does not run underneath it.
       </p>

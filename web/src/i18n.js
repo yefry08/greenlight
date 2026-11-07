@@ -11,6 +11,7 @@
  */
 import { createContext, useContext } from 'react'
 import { SITE } from './site.js'
+import { SQ } from './i18n.sq.js'
 
 export const LangContext = createContext(SITE.langs[0])
 
@@ -30,8 +31,11 @@ export function saveLang(lang) {
 
 export const useLang = () => useContext(LangContext)
 
-/** tr(english, spanish, albanian) for the current language. */
+/**
+ * tr(english, spanish, albanian) for the current language. Albanian not given
+ * at the call site comes from the SQ dictionary, keyed by the English.
+ */
 export function useT() {
   const lang = useContext(LangContext)
-  return (en, es, sq) => (lang === 'es' ? es ?? en : lang === 'sq' ? sq ?? en : en)
+  return (en, es, sq) => (lang === 'es' ? es ?? en : lang === 'sq' ? sq ?? SQ[en] ?? en : en)
 }

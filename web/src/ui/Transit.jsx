@@ -42,7 +42,7 @@ export default function Transit({ city = 'pristina' }) {
 
   useEffect(() => {
     let alive = true
-    document.title = `MainstreetAi · ${tr('Transit', 'Transporte')}`
+    document.title = `Greenlight AI · ${tr('Transit', 'Transporte')}`
     setData(undefined)
     fetch(assetUrl(`transit/${encodeURIComponent(city)}.json`))
       .then((r) => (r.ok ? r.json() : null))
@@ -126,14 +126,16 @@ export default function Transit({ city = 'pristina' }) {
         )}
         <p>
           {tr(`Every home in OpenStreetMap, checked against every bus stop: ${pct(t.coveredShare)} of ${t.homes.toLocaleString()} homes are within ${t.walkM} m of a stop. The red circles are ${data.gaps.length} places where ${t.minHomes} or more homes have none — ${t.flaggedHomes.toLocaleString()} homes in all. Each is a prompt for review, linked to the map data behind it; none is a recommendation.`,
-              `Cada vivienda de OpenStreetMap, comparada con cada parada de bus: el ${pct(t.coveredShare)} de ${t.homes.toLocaleString('es')} viviendas está a menos de ${t.walkM} m de una parada. Los círculos rojos son ${data.gaps.length} lugares donde ${t.minHomes} o más viviendas no tienen ninguna — ${t.flaggedHomes.toLocaleString('es')} viviendas en total. Cada uno es un aviso para revisar, enlazado a los datos del mapa que lo sostienen; ninguno es una recomendación.`)}
+              `Cada vivienda de OpenStreetMap, comparada con cada parada de bus: el ${pct(t.coveredShare)} de ${t.homes.toLocaleString('es')} viviendas está a menos de ${t.walkM} m de una parada. Los círculos rojos son ${data.gaps.length} lugares donde ${t.minHomes} o más viviendas no tienen ninguna — ${t.flaggedHomes.toLocaleString('es')} viviendas en total. Cada uno es un aviso para revisar, enlazado a los datos del mapa que lo sostienen; ninguno es una recomendación.`,
+            `Çdo banesë në OpenStreetMap, krahasuar me çdo stacion autobusi: ${pct(t.coveredShare)} e ${t.homes.toLocaleString()} banesave janë brenda ${t.walkM} m nga një stacion. Rrathët e kuq janë ${data.gaps.length} vende ku ${t.minHomes} ose më shumë banesa nuk kanë asnjë — gjithsej ${t.flaggedHomes.toLocaleString()} banesa. Secili është një thirrje për rishikim, e lidhur me të dhënat e hartës që e mbështesin; asnjë nuk është rekomandim.`)}
         </p>
       </header>
 
       <dl className="land-stats transit-stats">
         <div><dt>{tr('Bus stops', 'Paradas')}</dt><dd>{t.stops}</dd></div>
         <div><dt>{tr('Lines mapped', 'Líneas mapeadas')}</dt><dd>{lines.size}</dd></div>
-        <div><dt>{tr(`Homes within ${t.walkM} m`, `Viviendas a < ${t.walkM} m`)}</dt><dd>{pct(t.coveredShare)}</dd></div>
+        <div><dt>{tr(`Homes within ${t.walkM} m`, `Viviendas a < ${t.walkM} m`,
+            `Banesa brenda ${t.walkM} m`)}</dt><dd>{pct(t.coveredShare)}</dd></div>
         <div><dt>{tr('Homes in flagged areas', 'Viviendas en zonas marcadas')}</dt><dd className="bad">{t.flaggedHomes.toLocaleString()}</dd></div>
       </dl>
 
@@ -149,7 +151,8 @@ export default function Transit({ city = 'pristina' }) {
                 <button onClick={() => setPick(i)}>
                   <b>{g.homes} {tr('homes', 'viviendas')}{g.area?.name ? ` · ${g.area.name}` : ''}</b>
                   <span>{g.nearestM != null
-                    ? tr(`nearest stop ${g.nearestM} m`, `parada más cercana a ${g.nearestM} m`)
+                    ? tr(`nearest stop ${g.nearestM} m`, `parada más cercana a ${g.nearestM} m`,
+            `stacioni më i afërt ${g.nearestM} m`)
                     : tr('no stop found nearby', 'sin parada cercana')}
                     {g.nearestStop?.name ? ` · ${g.nearestStop.name}` : ''}</span>
                 </button>
@@ -176,7 +179,8 @@ export default function Transit({ city = 'pristina' }) {
           </ol>
           <p className="try-fine">
             {tr(`Showing the ${SHOWN} largest of ${data.gaps.length}. Click one on the map or here.`,
-                `Se muestran las ${SHOWN} mayores de ${data.gaps.length}. Haz clic en una del mapa o de aquí.`)}
+                `Se muestran las ${SHOWN} mayores de ${data.gaps.length}. Haz clic en una del mapa o de aquí.`,
+            `Shfaqen ${SHOWN} më të mëdhatë nga ${data.gaps.length}. Kliko njërën në hartë ose këtu.`)}
           </p>
         </section>
       </div>
@@ -194,7 +198,8 @@ export default function Transit({ city = 'pristina' }) {
         <b>{tr('Traffic in the centre.', 'El tráfico del centro.')}</b>{' '}
         <a href={toHash('yours', data.slug)}>
           {tr(`Open ${data.city}’s traffic twin: real streets, live traffic, and what adaptive signals change →`,
-              `Abre el gemelo de tráfico de ${data.city}: calles reales, tráfico en vivo y lo que cambian los semáforos adaptativos →`)}
+              `Abre el gemelo de tráfico de ${data.city}: calles reales, tráfico en vivo y lo que cambian los semáforos adaptativos →`,
+            `Hap binjakun e trafikut të ${data.city}: rrugë të vërteta, trafik i drejtpërdrejtë dhe çfarë ndryshojnë semaforët adaptivë →`)}
         </a>
       </p>
       <p className="land-credits">
@@ -239,19 +244,23 @@ function Scenario({ data, gap }) {
   )
   return (
     <section className="scn glass">
-      <h2>{all ? tr(`If all ${data.gaps.length} flagged areas got a bus`, `Si las ${data.gaps.length} zonas marcadas tuvieran bus`)
-               : tr(`If ${gap.area?.name ?? 'this area'} got a bus`, `Si ${gap.area?.name ?? 'esta zona'} tuviera bus`)}</h2>
+      <h2>{all ? tr(`If all ${data.gaps.length} flagged areas got a bus`, `Si las ${data.gaps.length} zonas marcadas tuvieran bus`,
+            `Sikur të ${data.gaps.length} zonat e shënuara të kishin autobus`)
+               : tr(`If ${gap.area?.name ?? 'this area'} got a bus`, `Si ${gap.area?.name ?? 'esta zona'} tuviera bus`,
+            `Sikur ${gap.area?.name ?? 'kjo zonë'} të kishte autobus`)}</h2>
       <div className="try-switch" role="group" aria-label={tr('Scope', 'Alcance')}>
         <button className={!all ? 'on' : ''} onClick={() => setAll(false)}>
           {gap.area?.name ?? tr('This area', 'Esta zona')} · {gap.homes}
         </button>
         <button className={all ? 'on' : ''} onClick={() => setAll(true)}>
-          {tr(`All ${data.gaps.length} areas`, `Las ${data.gaps.length} zonas`)} · {data.totals.flaggedHomes.toLocaleString()}
+          {tr(`All ${data.gaps.length} areas`, `Las ${data.gaps.length} zonas`,
+            `Të ${data.gaps.length} zonat`)} · {data.totals.flaggedHomes.toLocaleString()}
         </button>
       </div>
       <p className="try-fine">
         {tr(`${all ? data.totals.flaggedHomes : gap.homes} homes. The two shares below are assumptions, not data about ${data.city} — replace them with the municipality’s travel survey or GPS data.`,
-            `${all ? data.totals.flaggedHomes : gap.homes} viviendas. Los dos porcentajes de abajo son supuestos, no datos de ${data.city}: sustitúyelos por la encuesta de movilidad o los datos GPS de la municipalidad.`)}
+            `${all ? data.totals.flaggedHomes : gap.homes} viviendas. Los dos porcentajes de abajo son supuestos, no datos de ${data.city}: sustitúyelos por la encuesta de movilidad o los datos GPS de la municipalidad.`,
+            `${all ? data.totals.flaggedHomes : gap.homes} banesa. Dy përqindjet më poshtë janë supozime, jo të dhëna për ${data.city} — zëvendësoji me anketën e lëvizshmërisë ose të dhënat GPS të komunës.`)}
       </p>
       <div className="scn-sliders">
         {slider(tr('Homes that drive to the centre at peak', 'Viviendas que van en coche al centro en hora pico'), drive, setDrive)}
@@ -265,7 +274,8 @@ function Scenario({ data, gap }) {
       </dl>
       <p className="try-fine">
         {tr(`≈ ${(s.co2KgPerDay * 250 / 1000).toFixed(1)} t of CO₂ a year over 250 weekdays (the morning trip and the return). Distance is straight line × 1.3; CO₂ per km from the site’s fuel model at 30 km/h.`,
-            `≈ ${(s.co2KgPerDay * 250 / 1000).toFixed(1)} t de CO₂ al año en 250 días laborables (ida y vuelta). Distancia en línea recta × 1,3; CO₂ por km del modelo de consumo del sitio a 30 km/h.`)}
+            `≈ ${(s.co2KgPerDay * 250 / 1000).toFixed(1)} t de CO₂ al año en 250 días laborables (ida y vuelta). Distancia en línea recta × 1,3; CO₂ por km del modelo de consumo del sitio a 30 km/h.`,
+            `≈ ${(s.co2KgPerDay * 250 / 1000).toFixed(1)} t CO₂ në vit për 250 ditë pune (vajtje-ardhje). Distanca në vijë të drejtë × 1,3; CO₂ për km nga modeli i karburantit i faqes me 30 km/h.`)}
       </p>
 
       {c && (
@@ -276,7 +286,8 @@ function Scenario({ data, gap }) {
             <tbody>
               <tr><th>{Math.round(atOnce) === 1
                     ? tr('1 fewer car in the centre, fixed timing', '1 coche menos en el centro, horario fijo')
-                    : tr(`${Math.round(atOnce)} fewer cars in the centre, fixed timing`, `${Math.round(atOnce)} coches menos en el centro, horario fijo`)}</th>
+                    : tr(`${Math.round(atOnce)} fewer cars in the centre, fixed timing`, `${Math.round(atOnce)} coches menos en el centro, horario fijo`,
+            `${Math.round(atOnce)} makina më pak në qendër, orar fiks`)}</th>
                   {/* Fewer cars making each remaining one wait longer is seed noise
                       (measured: +3..+27% at 13%, -9..+26% at 30%), not an effect. */}
                   <td>{c.mode[0] > 0 ? <em className="scn-none">{tr('no measurable change', 'sin cambio medible')}</em> : verdict(c.mode, true)}</td></tr>
@@ -357,7 +368,8 @@ function Ask({ data, onPick }) {
       <h2>{tr('Ask the evidence', 'Pregunta a la evidencia')}</h2>
       <p className="try-fine">
         {tr(`Questions in ${askNames(0)}. The answer comes only from the ${records.size} numbered records on this page, and every claim is cited: click a citation to see it on the map or at its source. Nothing is recommended.`,
-            `Preguntas en ${askNames(1)}. La respuesta sale solo de los ${records.size} registros numerados de esta página, y cada afirmación va citada: pulsa una cita para verla en el mapa o en su fuente. No se recomienda nada.`)}
+            `Preguntas en ${askNames(1)}. La respuesta sale solo de los ${records.size} registros numerados de esta página, y cada afirmación va citada: pulsa una cita para verla en el mapa o en su fuente. No se recomienda nada.`,
+            `Pyetje në ${askNames(2)}. Përgjigjja vjen vetëm nga ${records.size} regjistrat e numëruar të kësaj faqeje, dhe çdo pohim ka burimin: kliko një citim për ta parë në hartë ose në burimin e tij. Nuk rekomandohet asgjë.`)}
       </p>
 
       <div className="try-key-row">

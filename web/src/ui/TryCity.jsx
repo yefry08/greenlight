@@ -201,7 +201,7 @@ export default function TryCity({ cityParam = null, onCityParam }) {
   const launch = useCallback(async () => {
     // Put the city in the address, so what is on screen can be shared.
     onCityParam?.(paramFor(city))
-    document.title = `MainstreetAi · ${city.name} traffic`
+    document.title = `Greenlight AI · ${city.name} traffic`
     const withLlm = llmOn && !!llm.key.trim()
     setRunLlm(withLlm)
     // The visitor's own model wins if they brought one; otherwise the trained
@@ -579,8 +579,8 @@ export default function TryCity({ cityParam = null, onCityParam }) {
       <header className="try-head">
         <h1>{tr('Your city', 'Tu ciudad')}</h1>
         <p>
-          {tr('Pick any city. MainstreetAi loads its real streets and traffic lights, runs two identical traffic simulations, and lets an adaptive controller time the lights in one of them — so you can see where traffic queues and how much adaptive signal timing helps. No account and no key needed.',
-              'Elige cualquier ciudad. MainstreetAi carga sus calles y semáforos reales, ejecuta dos simulaciones de tráfico idénticas y deja que un controlador adaptativo programe los semáforos en una de ellas, para que veas dónde se forman colas y cuánto ayudan los semáforos adaptativos. Sin cuenta y sin clave.')}
+          {tr('Pick any city. Greenlight AI loads its real streets and traffic lights, runs two identical traffic simulations, and lets an adaptive controller time the lights in one of them — so you can see where traffic queues and how much adaptive signal timing helps. No account and no key needed.',
+              'Elige cualquier ciudad. Greenlight AI carga sus calles y semáforos reales, ejecuta dos simulaciones de tráfico idénticas y deja que un controlador adaptativo programe los semáforos en una de ellas, para que veas dónde se forman colas y cuánto ayudan los semáforos adaptativos. Sin cuenta y sin clave.')}
         </p>
       </header>
 

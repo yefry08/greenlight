@@ -29,12 +29,12 @@ const LINKS = [
 ]
 
 export default function Contact() {
-  const [subject, setSubject] = useState('MainstreetAi')
+  const [subject, setSubject] = useState('Greenlight AI')
   const [body, setBody] = useState('')
   const [copied, setCopied] = useState(false)
 
   const mailto =
-    `mailto:${EMAIL}?subject=${encodeURIComponent(subject || 'MainstreetAi')}` +
+    `mailto:${EMAIL}?subject=${encodeURIComponent(subject || 'Greenlight AI')}` +
     `&body=${encodeURIComponent(body)}`
 
   const copy = async () => {
@@ -63,7 +63,7 @@ export default function Contact() {
             of it is happening in Spanish.
           </p>
           <p>
-            MainstreetAi came out of a question worth asking directly: how much
+            Greenlight AI came out of a question worth asking directly: how much
             congestion can you remove from a city without laying any new
             concrete? It runs two identical simulations of Barcelona on the real
             street network, differing only in who controls the traffic lights,
