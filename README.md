@@ -34,7 +34,7 @@ From OpenStreetMap (ODbL), read on 3 November 2026:
 |---|---:|
 | Homes | 27,640 |
 | Bus stops | 312 |
-| Bus routes | 35 |
+| Bus lines mapped | 20 (35 route relations, usually one per direction) |
 | Homes within 400 m of a stop (straight line) | 21,666 (**78 %**) |
 | Areas flagged for review | **135** |
 | Homes in flagged areas | **4,728** |
