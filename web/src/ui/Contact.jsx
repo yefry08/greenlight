@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useT } from '../i18n'
 
 /**
  * Contact: bio, links, and a message form.
@@ -25,10 +26,11 @@ const EMAIL = 'yefrynunez45@gmail.com'
 const LINKS = [
   { label: 'GitHub', href: 'https://github.com/yefry08', handle: '@yefry08' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/yefrynunez/', handle: 'yefrynunez' },
-  { label: 'This project', href: 'https://github.com/yefry08/MainstreetAi', handle: 'MainstreetAi' },
+  { label: 'This project', href: 'https://github.com/yefry08/greenlight', handle: 'greenlight' },
 ]
 
 export default function Contact() {
+  const tr = useT()
   const [subject, setSubject] = useState('Greenlight AI')
   const [body, setBody] = useState('')
   const [copied, setCopied] = useState(false)
@@ -54,27 +56,22 @@ export default function Contact() {
         <section className="contact-bio glass">
           <h1>Yefry Núñez</h1>
           <p className="contact-role">
-            Machine Learning Engineer · Founder, AI Safety Dominicana
+            {tr('Machine Learning Engineer · Founder, AI Safety Dominicana', null, 'Inxhinier i Mësimit Automatik · Themelues, AI Safety Dominicana')}
           </p>
           <p>
-            I build machine-learning systems and work on making them safe to
-            deploy. AI Safety Dominicana is my effort to grow that conversation
-            in the Dominican Republic and the wider Caribbean, where very little
-            of it is happening in Spanish.
+            {tr('I build machine-learning systems and work on making them safe to deploy. AI Safety Dominicana is my effort to grow that conversation in the Dominican Republic and the wider Caribbean, where very little of it is happening in Spanish.', null,
+                'Ndërtoj sisteme të mësimit automatik dhe punoj që ato të jenë të sigurta për t’u përdorur. AI Safety Dominicana është përpjekja ime për ta zgjeruar këtë bisedë në Republikën Domenikane dhe në Karaibe, ku shumë pak prej saj zhvillohet në spanjisht.')}
           </p>
           <p>
-            Greenlight AI came out of a question worth asking directly: how much
-            congestion can you remove from a city without laying any new
-            concrete? It runs two identical simulations of Barcelona on the real
-            street network, differing only in who controls the traffic lights,
-            and measures the gap.
+            {tr('Greenlight AI came out of a question worth asking directly: how much congestion can you remove from a city, and how many people can you bring within reach of a bus, without laying any new concrete? It reads every home and stop in Pristina from open data, and runs identical traffic simulations that differ only in who controls the traffic lights.', null,
+                'Greenlight AI lindi nga një pyetje që ia vlen të bëhet drejtpërdrejt: sa mbingarkesë mund të hiqet nga një qytet, dhe sa njerëz mund të afrohen me një autobus, pa hedhur asnjë beton të ri? Lexon çdo banesë dhe stacion në Prishtinë nga të dhëna të hapura, dhe nis simulime identike trafiku që ndryshojnë vetëm te kush drejton semaforët.')}
           </p>
 
           <div className="contact-links">
             {LINKS.map((l) => (
               <a key={l.label} href={l.href} target="_blank" rel="noreferrer"
                  className="contact-link">
-                <span className="contact-link-label">{l.label}</span>
+                <span className="contact-link-label">{l.label === 'This project' ? tr('This project', null, 'Ky projekt') : l.label}</span>
                 <span className="contact-link-handle">{l.handle}</span>
               </a>
             ))}
@@ -82,42 +79,41 @@ export default function Contact() {
         </section>
 
         <section className="contact-form glass">
-          <h2>Send a message</h2>
+          <h2>{tr('Send a message', null, 'Dërgo një mesazh')}</h2>
 
           <label className="contact-field">
-            <span>Subject</span>
+            <span>{tr('Subject', null, 'Tema')}</span>
             <input
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              placeholder="What is this about?"
+              placeholder={tr('What is this about?', null, 'Për çfarë bëhet fjalë?')}
             />
           </label>
 
           <label className="contact-field">
-            <span>Message</span>
+            <span>{tr('Message', null, 'Mesazhi')}</span>
             <textarea
               rows={7}
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              placeholder="Write your message here…"
+              placeholder={tr('Write your message here…', null, 'Shkruaj mesazhin këtu…')}
             />
           </label>
 
           <a className={`contact-send ${body.trim() ? '' : 'disabled'}`}
              href={body.trim() ? mailto : undefined}>
-            Open in mail app
+            {tr('Open in mail app', null, 'Hape në aplikacionin e postës')}
           </a>
 
           {/* The form composes a message; it does not send one. Saying so
               prevents someone typing, clicking, and assuming it went. */}
           <p className="contact-hint">
-            This opens your mail app with the message ready — it does not send
-            it from the page. No backend, so nothing is stored or forwarded
-            anywhere.
+            {tr('This opens your mail app with the message ready — it does not send it from the page. No backend, so nothing is stored or forwarded anywhere.', null,
+                'Kjo hap aplikacionin e postës me mesazhin gati — nuk e dërgon nga faqja. Pa server, ndaj asgjë nuk ruhet as nuk përcillet askund.')}
           </p>
 
           <button className="contact-copy" onClick={copy}>
-            {copied ? 'Copied' : EMAIL}
+            {copied ? tr('Copied', null, 'U kopjua') : EMAIL}
           </button>
         </section>
       </div>

@@ -18,32 +18,37 @@
  * reader announcing them twice is worse than not having the band at all.
  * Hovering pauses it, because text that will not hold still cannot be read.
  */
+import { useT } from '../i18n'
 
-const STEPS = [
+const steps = (tr) => [
   {
     n: '01',
-    title: 'Real streets',
-    body: 'Every street, lane, one-way and traffic light comes from the city\'s real map. Nothing here is invented.',
+    title: tr('Real streets'),
+    body: tr('Every street, lane, one-way and traffic light comes from the city’s real map. Nothing here is invented.', null,
+             'Çdo rrugë, korsi, rrugë njëkahëshe dhe semafor vjen nga harta reale e qytetit. Asgjë këtu nuk është e shpikur.'),
     tag: 'OpenStreetMap',
   },
   {
     n: '02',
-    title: 'Two identical twins',
-    body: 'Same city, same traffic, same random seed. The only difference between them is who controls the traffic lights.',
+    title: tr('Two identical twins'),
+    body: tr('Same city, same traffic, same random seed. The only difference between them is who controls the traffic lights.', null,
+             'I njëjti qytet, i njëjti trafik, e njëjta farë e rastësishme. Ndryshimi i vetëm mes tyre është kush drejton semaforët.'),
     tag: 'SUMO',
   },
   {
     n: '03',
-    title: 'The AI distributes green',
-    body: 'It reads each junction\'s queue and moves seconds from the empty direction to the full one. The difference between twins is the measurement.',
+    title: tr('The AI distributes green', null, 'IA shpërndan jeshilen'),
+    body: tr('It reads each junction’s queue and moves seconds from the empty direction to the full one. The difference between twins is the measurement.', null,
+             'Lexon radhën e çdo kryqëzimi dhe zhvendos sekonda nga drejtimi bosh te ai i mbushur. Ndryshimi mes binjakëve është matja.'),
     tag: 'Orchestrator',
   },
 ]
 
 function Track({ hidden }) {
+  const tr = useT()
   return (
     <ul className="hiw-track" aria-hidden={hidden || undefined}>
-      {STEPS.map((s) => (
+      {steps(tr).map((s) => (
         <li className="hiw-step" key={s.n}>
           <span className="hiw-n">{s.n}</span>
           <span className="hiw-body">
@@ -58,12 +63,13 @@ function Track({ hidden }) {
 }
 
 export default function HowItWorks({ onOpen }) {
+  const tr = useT()
   return (
-    <section className="hiw" aria-label="How it works, in three steps">
+    <section className="hiw" aria-label={tr('How it works, in three steps', null, 'Si funksionon, në tre hapa')}>
       {/* The band is the preview; the full section is the complete version. Link to it
           to avoid having two things with the same name and no relationship between them. */}
-      <button className="hiw-label" onClick={onOpen} title="See the full explanation">
-        How it works ↗
+      <button className="hiw-label" onClick={onOpen} title={tr('See the full explanation', null, 'Shiko shpjegimin e plotë')}>
+        {tr('How it works')} ↗
       </button>
       <div className="hiw-viewport">
         <div className="hiw-rail">

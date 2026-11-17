@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useT } from '../i18n'
 
 /**
  * The instrument bezel: live camera state framing the bottom of the viewport.
@@ -34,6 +35,7 @@ for (let deg = -TICK_SPAN; deg <= TICK_SPAN; deg += 10) {
 }
 
 export default function Bezel({ map, header }) {
+  const tr = useT()
   const tapeRef = useRef(null)
   const latRef = useRef(null)
   const lonRef = useRef(null)
@@ -96,13 +98,13 @@ export default function Bezel({ map, header }) {
           <>
             <span className="readout-rule" />
             <div className="readout">
-              <span className="label">On street</span>
+              <span className="label">{tr('On street')}</span>
               <span className="value">
                 {header.twins.ai.metrics.running.toLocaleString()}
               </span>
             </div>
             <div className="readout">
-              <span className="label">Queued</span>
+              <span className="label">{tr('Queued')}</span>
               <span className="value queued">
                 {header.twins.ai.metrics.halting.toLocaleString()}
               </span>
@@ -113,8 +115,8 @@ export default function Bezel({ map, header }) {
         {/* Rotation is bound to right-drag and ctrl-drag and is otherwise
             undiscoverable, so the bezel says so once, quietly. */}
         <div className="bezel-hint">
-          <div><b>drag</b> pan · <b>scroll</b> zoom</div>
-          <div><b>right-drag</b> orbit · <b>ctrl-drag</b> tilt</div>
+          <div><b>{tr('drag')}</b> {tr('pan')} · <b>{tr('scroll')}</b> {tr('zoom')}</div>
+          <div><b>{tr('right-drag')}</b> {tr('orbit')} · <b>{tr('ctrl-drag')}</b> {tr('tilt')}</div>
         </div>
       </div>
     </div>
@@ -122,9 +124,10 @@ export default function Bezel({ map, header }) {
 }
 
 function Readout({ label, valueRef, wide }) {
+  const tr = useT()
   return (
     <div className={`readout ${wide ? 'wide' : ''}`}>
-      <span className="label">{label}</span>
+      <span className="label">{tr(label)}</span>
       <span className="value" ref={valueRef}>
         –
       </span>

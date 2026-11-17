@@ -13,6 +13,7 @@ import Landing from './ui/Landing'
 import { SITE, hasScene } from './site'
 import { parseHash, toHash } from './data/route'
 import { LangContext, initialLang, saveLang } from './i18n'
+import { SQ } from './i18n.sq.js'
 
 
 import LiveCity from './ui/LiveCity'
@@ -69,11 +70,11 @@ const REPLAY_ONLY = import.meta.env?.VITE_REPLAY_ONLY === '1'
 // `ready` names the city, so the masthead cannot sit there announcing Barcelona
 // over a scene showing Midtown. The other three describe the basemap's health
 // and are the same wherever the camera is.
-const basemapLabel = (status, city) => ({
-  loading: 'Basemap · loading',
-  ready: cityConfig(city).label3d,
-  fallback: 'Basemap · fallback',
-  offline: 'Basemap · offline',
+const basemapLabel = (status, city, tr) => ({
+  loading: tr('Basemap · loading', null, 'Harta bazë · duke u ngarkuar'),
+  ready: tr(cityConfig(city).label3d),
+  fallback: tr('Basemap · fallback', null, 'Harta bazë · rezervë'),
+  offline: tr('Basemap · offline', null, 'Harta bazë · jashtë linje'),
 }[status])
 
 // A tab this site does not have (an old #/barcelona link on the Latin America
@@ -90,6 +91,9 @@ export default function App() {
   // "@lat,lon,Name" place. TryCity opens and analyses it.
   const [cityParam, setCityParam] = useState(() => parseHash().city)
   const [lang, setLang] = useState(initialLang)
+  // App provides the language context, so it cannot read it with useT(): the
+  // same rule as i18n.js, applied to App's own state.
+  const tr = (en, es, sq) => (lang === 'es' ? es ?? en : lang === 'sq' ? sq ?? SQ[en] ?? en : en)
   useEffect(() => { document.documentElement.lang = lang }, [lang])
   const onLang = useCallback((l) => { setLang(l); saveLang(l) }, [])
 
@@ -192,12 +196,12 @@ export default function App() {
       isLanding ? `${SITE.name} · ${SITE.tagline[lang] ?? SITE.tagline.en}`
       : isHome ? `${SITE.name} · Barcelona`
       : isManhattan ? `${SITE.name} · Manhattan`
-      : isCity ? `${SITE.name} · How it works`
-      : tab === 'yours' ? `${SITE.name} · Your city`
-      : tab === 'research' ? `${SITE.name} · Research`
+      : isCity ? `${SITE.name} · ${tr('How it works', 'Cómo funciona')}`
+      : tab === 'yours' ? `${SITE.name} · ${tr('Your city', 'Tu ciudad')}`
+      : tab === 'research' ? `${SITE.name} · ${tr('Research', 'Investigación')}`
       // Transit and Green set their own titles, with the city in them.
       : tab === 'transit' || tab === 'green' ? document.title
-      : `${SITE.name} · Contact`
+      : `${SITE.name} · ${tr('Contact', 'Contacto')}`
   }, [isLanding, isHome, isManhattan, isCity, tab, lang])
 
   // Picking a district shows it in the pixel view, which lives on this tab. It
@@ -275,7 +279,7 @@ export default function App() {
             <div className="masthead-live">
               <LiveCity />
               <span className="masthead-tag">
-                {status === 'live' ? basemapLabel(basemap, sceneCity)
+                {status === 'live' ? basemapLabel(basemap, sceneCity, tr)
                                    : `Simulation · ${status}`}
               </span>
             </div>
@@ -315,7 +319,7 @@ export default function App() {
 
       {tab === 'yours' && (
         <div className="page-layer">
-          <Suspense fallback={<p className="page-loading">{lang === 'es' ? 'Cargando…' : 'Loading…'}</p>}>
+          <Suspense fallback={<p className="page-loading">{tr('Loading…', 'Cargando…')}</p>}>
             <TryCity cityParam={cityParam} onCityParam={onCityParam} />
           </Suspense>
         </div>
@@ -323,7 +327,7 @@ export default function App() {
 
       {tab === 'transit' && (
         <div className="page-layer">
-          <Suspense fallback={<p className="page-loading">{lang === 'es' ? 'Cargando…' : 'Loading…'}</p>}>
+          <Suspense fallback={<p className="page-loading">{tr('Loading…', 'Cargando…')}</p>}>
             <Transit city={cityParam ?? SITE.defaultCity.transit} />
           </Suspense>
         </div>
@@ -331,7 +335,7 @@ export default function App() {
 
       {tab === 'green' && (
         <div className="page-layer">
-          <Suspense fallback={<p className="page-loading">{lang === 'es' ? 'Cargando…' : 'Loading…'}</p>}>
+          <Suspense fallback={<p className="page-loading">{tr('Loading…', 'Cargando…')}</p>}>
             <Green city={cityParam ?? SITE.defaultCity.green} onCityParam={onGreenCity} />
           </Suspense>
         </div>
@@ -339,7 +343,7 @@ export default function App() {
 
       {tab === 'research' && (
         <div className="page-layer">
-          <Suspense fallback={<p className="page-loading">Loading…</p>}>
+          <Suspense fallback={<p className="page-loading">{tr('Loading…')}</p>}>
             <Research />
           </Suspense>
         </div>
@@ -347,7 +351,7 @@ export default function App() {
 
       {tab === 'contact' && (
         <div className="page-layer">
-          <Suspense fallback={<p className="page-loading">Loading…</p>}>
+          <Suspense fallback={<p className="page-loading">{tr('Loading…')}</p>}>
             <Contact />
           </Suspense>
         </div>

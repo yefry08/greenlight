@@ -6,6 +6,7 @@ import {
 import { animate } from 'animejs'
 import { createTwins, compare } from '../city/sim'
 import { N, SPACING, makeGrid, buildBlock } from '../city/miniCity'
+import { useT } from '../i18n'
 
 /**
  * "Cómo funciona": the mechanism, demonstrated in 3D rather than described.
@@ -35,27 +36,30 @@ import { N, SPACING, makeGrid, buildBlock } from '../city/miniCity'
  * belongs in an explainer.
  */
 
-const STAGES = [
+const stages = (tr) => [
   {
     n: '01',
-    title: 'The real network',
-    body: 'Streets, lanes and junctions. Those with more than two approaches have a ' +
-          'traffic light, and each one alternates two groups of opposite directions.',
-    note: 'Here the grid is synthetic; in the real app it comes from OpenStreetMap.',
+    title: tr('The real network', null, 'Rrjeti i vërtetë'),
+    body: tr('Streets, lanes and junctions. Those with more than two approaches have a traffic light, and each one alternates two groups of opposite directions.', null,
+             'Rrugë, korsi dhe kryqëzime. Ato me më shumë se dy hyrje kanë semafor, dhe secili alternon dy grupe drejtimesh të kundërta.'),
+    note: tr('Here the grid is synthetic; in the real app it comes from OpenStreetMap.', null,
+             'Këtu rrjeti është sintetik; në aplikacionin real vjen nga OpenStreetMap.'),
   },
   {
     n: '02',
-    title: 'Two identical twins',
-    body: 'Same network, same cars, same seed. Both start at fixed time, so their ' +
-          'numbers match to the last decimal.',
-    note: 'If they were not identical here, no later difference would prove anything.',
+    title: tr('Two identical twins', null, 'Dy binjakë identikë'),
+    body: tr('Same network, same cars, same seed. Both start at fixed time, so their numbers match to the last decimal.', null,
+             'I njëjti rrjet, të njëjtat makina, e njëjta farë. Të dy nisin me orar fiks, ndaj shifrat e tyre përputhen deri në decimalen e fundit.'),
+    note: tr('If they were not identical here, no later difference would prove anything.', null,
+             'Nëse nuk do të ishin identikë këtu, asnjë ndryshim i mëvonshëm nuk do të provonte asgjë.'),
   },
   {
     n: '03',
-    title: 'The controller distributes green',
-    body: 'It reads how many cars are waiting in each group at each junction and moves ' +
-          'seconds from the empty side to the full one, without extending the cycle. The orange ones are stopped.',
-    note: 'In the demo a rule decides, not a model: a language model would need a key and network.',
+    title: tr('The controller distributes green', null, 'Kontrolluesi shpërndan jeshilen'),
+    body: tr('It reads how many cars are waiting in each group at each junction and moves seconds from the empty side to the full one, without extending the cycle. The orange ones are stopped.', null,
+             'Lexon sa makina presin në çdo grup të çdo kryqëzimi dhe zhvendos sekonda nga ana bosh te ana e mbushur, pa e zgjatur ciklin. Ato portokalli janë të ndaluara.'),
+    note: tr('In the demo a rule decides, not a model: a language model would need a key and network.', null,
+             'Në demonstrim vendos një rregull, jo një model: një model gjuhësor do të kërkonte çelës dhe internet.'),
   },
 ]
 
@@ -87,6 +91,8 @@ function decide(world) {
 }
 
 export default function HowItWorksPage() {
+  const tr = useT()
+  const STAGES = stages(tr)
   const [stage, setStage] = useState(0)
   const [stats, setStats] = useState(null)
   const [decisions, setDecisions] = useState(0)
@@ -270,11 +276,10 @@ export default function HowItWorksPage() {
   return (
     <div className="hw-page">
       <header className="hw-head">
-        <h1>How it works</h1>
+        <h1>{tr('How it works')}</h1>
         <p>
-          Three steps, all three running real in your browser. What you see below
-          is not a video: it is the same simulation engine that powers the app, with
-          no network and no API key.
+          {tr('Three steps, all three running real in your browser. What you see below is not a video: it is the same simulation engine that powers the app, with no network and no API key.', null,
+              'Tre hapa, të tre funksionojnë realisht në shfletuesin tënd. Ajo që sheh më poshtë nuk është video: është i njëjti motor simulimi që drejton aplikacionin, pa internet dhe pa çelës API.')}
         </p>
       </header>
 
@@ -293,14 +298,14 @@ export default function HowItWorksPage() {
       <div ref={mountRef} className="hw-stage">
         {webglFailed && (
           <p className="hw-nogl">
-            Your browser doesn't have WebGL available, so the 3D scene cannot be
-            rendered. The three steps are still explained below.
+            {tr('Your browser doesn’t have WebGL available, so the 3D scene cannot be rendered. The three steps are still explained below.', null,
+                'Shfletuesi yt nuk ka WebGL, ndaj skena 3D nuk mund të shfaqet. Tre hapat shpjegohen gjithsesi më poshtë.')}
           </p>
         )}
         {stage === 2 && !webglFailed && (
           <div className="hw-tags">
-            <span>Fixed time</span>
-            <span className="ai">Controlled</span>
+            <span>{tr('Fixed time', null, 'Orar fiks')}</span>
+            <span className="ai">{tr('Controlled', null, 'I kontrolluar')}</span>
           </div>
         )}
       </div>
@@ -314,22 +319,22 @@ export default function HowItWorksPage() {
         <div className="hw-metrics">
           {showCompare ? (
             <>
-              <Cmp label="Average speed" b={stats.fixed.meanSpeedKmh}
+              <Cmp label={tr('Average speed')} b={stats.fixed.meanSpeedKmh}
                    a={stats.ai.meanSpeedKmh} d={stats.speed} unit=" km/h" />
-              <Cmp label="Queued now" b={stats.fixed.queued} a={stats.ai.queued} d={stats.queued} />
-              <Cmp label="Junctions completed" b={stats.fixed.arrivals}
+              <Cmp label={tr('Queued now', null, 'Në radhë tani')} b={stats.fixed.queued} a={stats.ai.queued} d={stats.queued} />
+              <Cmp label={tr('Junctions completed', null, 'Kryqëzime të kaluara')} b={stats.fixed.arrivals}
                    a={stats.ai.arrivals} d={stats.arrivals} />
               <div className="hw-metric">
-                <span className="hw-metric-label">Retimed junctions</span>
+                <span className="hw-metric-label">{tr('Retimed junctions', null, 'Kryqëzime të rirregulluara')}</span>
                 <b className="hw-metric-solo">{decisions}</b>
               </div>
             </>
           ) : (
             <>
-              <Solo label="Vehicles" v={stats.fixed.vehicles} />
-              <Solo label="Moving" v={stats.fixed.moving} />
-              <Solo label="Queued" v={stats.fixed.queued} />
-              <Solo label="Average speed" v={stats.fixed.meanSpeedKmh} unit=" km/h" />
+              <Solo label={tr('Vehicles', null, 'Automjete')} v={stats.fixed.vehicles} />
+              <Solo label={tr('Moving', null, 'Në lëvizje')} v={stats.fixed.moving} />
+              <Solo label={tr('Queued', null, 'Në radhë')} v={stats.fixed.queued} />
+              <Solo label={tr('Average speed')} v={stats.fixed.meanSpeedKmh} unit=" km/h" />
             </>
           )}
         </div>
@@ -338,19 +343,17 @@ export default function HowItWorksPage() {
       <div className="hw-actions">
         {stage < 2
           ? <button className="tl-btn primary" onClick={() => setStage(stage + 1)}>
-              Next step →
+              {tr('Next step →', null, 'Hapi tjetër →')}
             </button>
-          : <button className="tl-btn primary" onClick={restart}>Start over</button>}
+          : <button className="tl-btn primary" onClick={restart}>{tr('Start over')}</button>}
         {stage > 0 && (
-          <button className="tl-btn" onClick={() => setStage(stage - 1)}>← Previous step</button>
+          <button className="tl-btn" onClick={() => setStage(stage - 1)}>{tr('← Previous step', null, '← Hapi i mëparshëm')}</button>
         )}
       </div>
 
       <p className="hw-foot">
-        Both twins start from the same seed and carry the same traffic, so any
-        difference between them is the controller and nothing else. In Home the same
-        approach runs on Barcelona with SUMO, a full traffic simulator, and yields
-        <b> +41.1%</b> network speed.
+        {tr('Both twins start from the same seed and carry the same traffic, so any difference between them is the controller and nothing else. On the Barcelona tab the same approach runs with SUMO, a full traffic simulator, and yields +41.1% network speed.', null,
+            'Të dy binjakët nisin nga e njëjta farë dhe kanë të njëjtin trafik, ndaj çdo ndryshim mes tyre është kontrolluesi dhe asgjë tjetër. Në skedën e Barcelonës e njëjta qasje funksionon me SUMO, një simulator i plotë trafiku, dhe jep +41,1% shpejtësi rrjeti.')}
       </p>
     </div>
   )

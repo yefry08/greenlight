@@ -194,4 +194,70 @@ export const SQ = {
   'This key could not be used': 'Ky çelës nuk mund të përdorej',
   'Try again': 'Provo përsëri',
   'Start over': 'Fillo nga e para',
+  'Search any place. Its real streets and traffic lights load from OpenStreetMap, and a neural network trained on real cities times the lights in your browser. No account, no key.':
+    'Kërko çdo vend. Rrugët dhe semaforët e tij të vërtetë ngarkohen nga OpenStreetMap, dhe një rrjet neuronal i trajnuar në qytete reale rregullon semaforët në shfletuesin tënd. Pa llogari, pa çelës.',
+  'Traffic runs in a simulator in your browser, on each city’s real streets. Results show how adaptive timing behaves on that network; they are not a forecast of real-world traffic. Trees, bike lanes and bus stops come from OpenStreetMap, which can be incomplete — each page says where.':
+    'Trafiku simulohet në shfletuesin tënd, mbi rrugët e vërteta të çdo qyteti. Rezultatet tregojnë si sillen semaforët adaptivë në atë rrjet; nuk janë parashikim i trafikut real. Pemët, korsitë e biçikletave dhe stacionet e autobusëve vijnë nga OpenStreetMap, që mund të jetë i paplotë — çdo faqe tregon ku.',
+  'Reads the queue on each arm of the busiest junctions and returns new green times.':
+    'Lexon radhën në çdo krah të kryqëzimeve më të ngarkuara dhe kthen kohë të reja jeshile.',
+  'Little to fix here. Traffic at these junctions is light or evenly balanced, so the controller is mostly leaving timings alone — which is the right call, and why the numbers above barely move.':
+    'Pak për të rregulluar këtu. Trafiku në këto kryqëzime është i lehtë ose i balancuar, ndaj kontrolluesi kryesisht i lë oraret siç janë — që është vendimi i duhur, dhe arsyeja pse shifrat më lart pothuajse nuk lëvizin.',
+  'OpenStreetMap has almost no traffic lights mapped here, so their positions are ':
+    'OpenStreetMap nuk ka pothuajse asnjë semafor të hartuar këtu, ndaj vendet e tyre janë ',
+  'estimated': 'të vlerësuara',
+  ' (every junction of three or more streets). Treat this run as illustrative of the method rather than of this city’s actual signals.':
+    ' (çdo kryqëzim me tre ose më shumë rrugë). Merre këtë simulim si ilustrim të metodës, jo të semaforëve realë të qytetit.',
+  'The streets, their lanes, speed limits and one-way rules, and where the traffic lights are, all come from OpenStreetMap (© OpenStreetMap contributors, ODbL). Both twins carry the same vehicles on the same streets from the same seed; the only difference is who times the lights.':
+    'Rrugët, korsitë, kufijtë e shpejtësisë, rregullat njëkahëshe dhe vendet e semaforëve vijnë të gjitha nga OpenStreetMap (© kontribuuesit e OpenStreetMap, ODbL). Të dy binjakët kanë të njëjtat automjete në të njëjtat rrugë nga e njëjta farë; ndryshimi i vetëm është kush rregullon semaforët.',
+  'Vehicles follow random routes rather than measured trips, so this shows how adaptive timing behaves on this city’s network, not a forecast of its real traffic. The rule-based controller, measured on all 37 ready-made cities with three runs each, cut time stopped in 24 of them and made none measurably worse (mean −16%). The neural network was tested on 10 cities it never saw in training; its result is shown with the controller above. Average speed moves little either way: most of a trip is driving, not waiting at a light.':
+    'Automjetet ndjekin itinerare të rastësishme, jo udhëtime të matura, ndaj kjo tregon si sillen semaforët adaptivë në rrjetin e këtij qyteti, jo një parashikim të trafikut të tij real. Kontrolluesi me rregulla, i matur në të 37 qytetet e gatshme me nga tre simulime, uli kohën e ndalimit në 24 prej tyre dhe nuk përkeqësoi asnjë në mënyrë të matshme (mesatarisht −16%). Rrjeti neuronal u testua në 10 qytete që nuk i pa gjatë trajnimit; rezultati i tij shfaqet te kontrolluesi më lart. Shpejtësia mesatare ndryshon pak: pjesa më e madhe e udhëtimit është lëvizje, jo pritje te semafori.',
+  'Pick any city. Greenlight AI loads its real streets and traffic lights, runs two identical traffic simulations, and lets an adaptive controller time the lights in one of them — so you can see where traffic queues and how much adaptive signal timing helps. No account and no key needed.':
+    'Zgjidh çdo qytet. Greenlight AI ngarkon rrugët dhe semaforët e tij të vërtetë, nis dy simulime identike trafiku dhe lë një kontrollues adaptiv të rregullojë semaforët në njërin prej tyre — që të shohësh ku formohen radhët dhe sa ndihmojnë semaforët adaptivë. Nuk duhet llogari as çelës.',
+  'City, district or address — e.g. Valencia, Medellín, Shibuya': 'Qytet, lagje ose adresë — p.sh. Prishtinë, Valencia, Shibuya',
+  'Search uses OpenStreetMap’s Nominatim; only the text you type is sent. The area analysed is about 2.5 km across, centred on the place you pick.':
+    'Kërkimi përdor Nominatim të OpenStreetMap; dërgohet vetëm teksti që shkruan. Zona e analizuar është rreth 2,5 km e gjerë, me qendër në vendin që zgjedh.',
+  'It lives only in this tab’s memory and goes straight from your browser to the provider you pick — this site is static and has no server of its own. Use a key with a spending limit: it is the one protection that does not depend on trusting us.':
+    'Ruhet vetëm në kujtesën e kësaj skede dhe shkon drejt nga shfletuesi yt te ofruesi që zgjedh — kjo faqe është statike dhe nuk ka server të vetin. Përdor një çelës me kufi shpenzimesh: është mbrojtja e vetme që nuk varet nga besimi te ne.',
+  // Barcelona scene panels
+  'fixed · AI': 'fiks · IA',
+  'Climate impact': 'Ndikimi klimatik',
+  'Fuel': 'Karburanti',
+  'Time lost stopped': 'Kohë e humbur në ndalim',
+  'Bus time lost': 'Kohë e humbur e autobusëve',
+  'p95 wait': 'Pritja p95',
+  'Waiting > 5 min': 'Pritje > 5 min',
+  'CO₂ avoided': 'CO₂ i shmangur',
+  'Driver wait (p95)': 'Pritja e shoferëve (p95)',
+  'Impact': 'Ndikimi',
+  'AI vs fixed-time': 'IA kundrejt orarit fiks',
+  'vehicle-minutes saved': 'minuta-automjeti të kursyera',
+  'On street': 'Në rrugë',
+  'Motorcycles': 'Motoçikleta',
+  'Buses': 'Autobusë',
+  'Vans & trucks': 'Furgonë dhe kamionë',
+  'Bicycles': 'Biçikleta',
+  'Cars': 'Makina',
+  'Queued right now': 'Në radhë tani',
+  'Queued': 'Në radhë',
+  'Day & peak': 'Dita dhe piku',
+  'measured': 'i matur',
+  'Monday': 'E hënë', 'Tuesday': 'E martë', 'Wednesday': 'E mërkurë', 'Thursday': 'E enjte',
+  'Friday': 'E premte', 'Saturday': 'E shtunë', 'Sunday': 'E diel',
+  'Mon': 'Hën', 'Tue': 'Mar', 'Wed': 'Mër', 'Thu': 'Enj', 'Fri': 'Pre', 'Sat': 'Sht', 'Sun': 'Die',
+  'Morning': 'Mëngjes', 'Afternoon': 'Pasdite', 'Evening': 'Mbrëmje',
+  'drag': 'tërhiq', 'pan': 'lëviz', 'scroll': 'rrotullo', 'zoom': 'zmadho',
+  'right-drag': 'tërhiq me të djathtën', 'orbit': 'rrotullim', 'ctrl-drag': 'ctrl + tërhiq', 'tilt': 'anim',
+  'Latitude': 'Gjerësia', 'Longitude': 'Gjatësia', 'Zoom': 'Zmadhimi', 'Pitch': 'Pjerrësia', 'Bearing': 'Drejtimi',
+  'Zoom in': 'Zmadho', 'Zoom out': 'Zvogëlo', 'Reset bearing to north': 'Kthe drejtimin në veri',
+  'Tilt into 3D': 'Anoje në 3D', 'Flatten to overhead': 'Shiko nga lart', 'Toggle tilt': 'Ndrysho animin',
+  'Return to the Eixample': 'Kthehu në Eixample', 'Return to start': 'Kthehu në fillim',
+  'BCN live': 'BCN drejtpërdrejt',
+  'Barcelona · Signal Twin': 'Barcelona · Binjaku i semaforëve',
+  'Latin America': 'Amerika Latine', 'North America': 'Amerika e Veriut', 'Europe': 'Evropa',
+  'Asia & Oceania': 'Azia dhe Oqeania', 'Africa': 'Afrika',
+  'site copy': 'kopja e faqes',
+  'Midtown Manhattan · Signal Twin': 'Midtown Manhattan · Binjaku i semaforëve',
+
+  "Your model reads the queues at the busiest junctions and returns green times, in place of the built-in controller. It also picks the city's colours.":
+    'Modeli yt lexon radhët në kryqëzimet më të ngarkuara dhe kthen kohët jeshile, në vend të kontrolluesit të integruar. Ai zgjedh edhe ngjyrat e qytetit.',
 }
