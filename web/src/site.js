@@ -14,7 +14,9 @@
  */
 import { CITIES, citySlug } from './city/cities.js'
 
-const ONLY = ['pristina', 'barcelona']
+// Singapore is the benchmark: about 25 hours a year lost to congestion against
+// London's 148 -- the city Pristina's planners can compare their streets with.
+const ONLY = ['pristina', 'barcelona', 'singapore']
 
 export const SITE = {
   name: 'Greenlight AI',

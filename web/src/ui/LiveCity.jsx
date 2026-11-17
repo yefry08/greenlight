@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useT } from '../i18n'
 
 /**
  * Barcelona's ACTUAL congestion, right now, next to the simulated clock.
@@ -28,6 +29,7 @@ const POLL_MS = 200_000
 const STALE_S = 900
 
 export default function LiveCity() {
+  const tr = useT()
   const [live, setLive] = useState(null)
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export default function LiveCity() {
     <span className={`livecity ${stale ? 'stale' : ''} ${thin ? 'thin' : ''}`}
           title={title}>
       <span className="livecity-dot" />
-      <span className="livecity-label">BCN live</span>
+      <span className="livecity-label">{tr('BCN live')}</span>
       <span className="livecity-value value">
         {thin ? `~${Math.round(pct)}%` : `${pct.toFixed(1)}%`}
       </span>

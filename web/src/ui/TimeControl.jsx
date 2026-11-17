@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { postControl } from '../data/useSimSocket'
+import { useT } from '../i18n'
 
 /**
  * Day and peak selection, driven by MEASURED Barcelona traffic.
@@ -26,6 +27,7 @@ const PEAKS = [
 ]
 
 export default function TimeControl({ header }) {
+  const tr = useT()
   const [profile, setProfile] = useState(null)
   const [day, setDay] = useState('Friday')
   const [busy, setBusy] = useState(false)
@@ -57,8 +59,8 @@ export default function TimeControl({ header }) {
   return (
     <section className={`glass panel timectl ${busy ? 'busy' : ''}`}>
       <header className="panel-head">
-        <h2>Day &amp; peak</h2>
-        <span className="panel-sub">measured</span>
+        <h2>{tr('Day & peak')}</h2>
+        <span className="panel-sub">{tr('measured')}</span>
       </header>
 
       <div className="day-row">
@@ -67,9 +69,9 @@ export default function TimeControl({ header }) {
             key={full}
             className={`day-chip ${day === full ? 'on' : ''}`}
             onClick={() => go(full, peaks.morning?.hour ?? 8)}
-            title={full}
+            title={tr(full)}
           >
-            {short}
+            {tr(short)}
           </button>
         ))}
       </div>
@@ -100,7 +102,7 @@ export default function TimeControl({ header }) {
               className={`peak-chip ${active ? 'on' : ''}`}
               onClick={() => go(day, p.hour)}
             >
-              <span className="peak-label">{label}</span>
+              <span className="peak-label">{tr(label)}</span>
               <span className="peak-hour value">
                 {String(p.hour).padStart(2, '0')}:00
               </span>

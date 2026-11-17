@@ -201,7 +201,7 @@ export default function TryCity({ cityParam = null, onCityParam }) {
   const launch = useCallback(async () => {
     // Put the city in the address, so what is on screen can be shared.
     onCityParam?.(paramFor(city))
-    document.title = `Greenlight AI · ${city.name} traffic`
+    document.title = `Greenlight AI · ${tr(`${city.name} traffic`, `Tráfico de ${city.name}`, `Trafiku i ${city.name}`)}`
     const withLlm = llmOn && !!llm.key.trim()
     setRunLlm(withLlm)
     // The visitor's own model wins if they brought one; otherwise the trained
@@ -230,7 +230,8 @@ export default function TryCity({ cityParam = null, onCityParam }) {
       }
       setGraph(g)
       setDetail(tr(`${g.stats.edges} streets · ${g.stats.signals} junctions with traffic lights`,
-                   `${g.stats.edges} calles · ${g.stats.signals} cruces con semáforo`))
+                   `${g.stats.edges} calles · ${g.stats.signals} cruces con semáforo`,
+                   `${g.stats.edges} rrugë · ${g.stats.signals} kryqëzime me semaforë`))
 
       // --- 2b. live traffic, if the site has a Mapbox or TomTom key ----------
       // Sizes the fleet to how congested these streets are right now. Optional:
@@ -415,7 +416,8 @@ export default function TryCity({ cityParam = null, onCityParam }) {
             <h1>{city.flag ?? '📍'} {city.name}</h1>
             <p className="try-run-sub">
               {tr(`${s.edges} streets · ${s.signals} of ${s.junctions} junctions with traffic lights · ${world.fleet.length} vehicles`,
-                  `${s.edges} calles · ${s.signals} de ${s.junctions} cruces con semáforo · ${world.fleet.length} vehículos`)} ·
+                  `${s.edges} calles · ${s.signals} de ${s.junctions} cruces con semáforo · ${world.fleet.length} vehículos`,
+                  `${s.edges} rrugë · ${s.signals} nga ${s.junctions} kryqëzime me semaforë · ${world.fleet.length} automjete`)} ·
               {' '}<span className="try-source">{source === 'ready-made' ? tr('ready-made streets', 'calles incluidas') : tr('streets downloaded live', 'calles descargadas en vivo')}</span>
             </p>
           </div>
@@ -456,10 +458,12 @@ export default function TryCity({ cityParam = null, onCityParam }) {
                 const jam = pc(live.shares.moderate + live.shares.heavy + live.shares.severe)
                 const bad = pc(live.shares.heavy + live.shares.severe)
                 return tr(`: of ${live.km.toFixed(0)} km of road here, ${jam}% is congested (${bad}% heavy or severe); estimated speed ~${pc(live.ratio)}% of free flow · read at ${at} your time.`,
-                          `: de ${live.km.toFixed(0)} km de calles aquí, el ${jam}% está congestionado (${bad}% denso o severo); velocidad estimada ~${pc(live.ratio)}% de la normal · leído a las ${at} (tu hora).`)
+                          `: de ${live.km.toFixed(0)} km de calles aquí, el ${jam}% está congestionado (${bad}% denso o severo); velocidad estimada ~${pc(live.ratio)}% de la normal · leído a las ${at} (tu hora).`,
+                          `: nga ${live.km.toFixed(0)} km rrugë këtu, ${jam}% është e mbingarkuar (${bad}% rëndë ose shumë rëndë); shpejtësia e vlerësuar ~${pc(live.ratio)}% e qarkullimit të lirë · lexuar në ${at} sipas orës sate.`)
               }
               return tr(`: these streets are moving at ${Math.round(live.currentKmh)} km/h, ${pc(live.ratio)}% of their free-flow ${Math.round(live.freeKmh)} km/h (${live.points} points) · read at ${at} your time.`,
-                        `: estas calles van a ${Math.round(live.currentKmh)} km/h, el ${pc(live.ratio)}% de sus ${Math.round(live.freeKmh)} km/h sin tráfico (${live.points} puntos) · leído a las ${at} (tu hora).`)
+                        `: estas calles van a ${Math.round(live.currentKmh)} km/h, el ${pc(live.ratio)}% de sus ${Math.round(live.freeKmh)} km/h sin tráfico (${live.points} puntos) · leído a las ${at} (tu hora).`,
+                        `: këto rrugë lëvizin me ${Math.round(live.currentKmh)} km/h, ${pc(live.ratio)}% e ${Math.round(live.freeKmh)} km/h pa trafik (${live.points} pika) · lexuar në ${at} sipas orës sate.`)
             })()}
             {' '}{tr('Both twins carry a fleet sized to that congestion, so the comparison below is for the traffic this city has right now. Sizing the fleet from congestion is a rule of thumb, not a calibration.',
                      'Los dos gemelos llevan una flota ajustada a esa congestión, así que la comparación de abajo es para el tráfico que la ciudad tiene ahora mismo. Ajustar la flota a la congestión es una regla aproximada, no una calibración.')}
@@ -498,7 +502,7 @@ export default function TryCity({ cityParam = null, onCityParam }) {
           return (
             <p className="try-co2">
               {savedKgH > 0
-                ? <>≈ <b>{tr(`${savedKgH.toFixed(0)} kg of CO₂ avoided per hour`, `${savedKgH.toFixed(0)} kg de CO₂ evitados por hora`)}</b>
+                ? <>≈ <b>{tr(`${savedKgH.toFixed(0)} kg of CO₂ avoided per hour`, `${savedKgH.toFixed(0)} kg de CO₂ evitados por hora`, `${savedKgH.toFixed(0)} kg CO₂ të shmangur në orë`)}</b>
                     {' '}{tr('for the same distance driven in this ~2.5 km area, from fewer stops and less idling.',
                              'para la misma distancia recorrida en esta zona de ~2,5 km, gracias a menos paradas y menos tiempo al ralentí.')}</>
                 : tr('No CO₂ saving per kilometre at this traffic level so far.', 'Por ahora no hay ahorro de CO₂ por kilómetro con este nivel de tráfico.')}
@@ -627,7 +631,7 @@ export default function TryCity({ cityParam = null, onCityParam }) {
                 return (
                   <button key={citySlug(c)} className={`try-chip ${city === c ? 'on' : ''}`}
                           onClick={() => setCity(c)}
-                          title={info ? tr(`${info.signals} junctions with traffic lights`, `${info.signals} cruces con semáforo`) : undefined}>
+                          title={info ? tr(`${info.signals} junctions with traffic lights`, `${info.signals} cruces con semáforo`, `${info.signals} kryqëzime me semaforë`) : undefined}>
                     <span className="flag">{c.flag}</span>{c.name}
                     {c.capital && <i className="try-cap" aria-label="capital" title="Capital">★</i>}
                   </button>
@@ -648,7 +652,8 @@ export default function TryCity({ cityParam = null, onCityParam }) {
               <b>{tr('Neural network', 'Red neuronal')}</b>
               <em>{nn === undefined ? tr('loading…', 'cargando…')
                 : nn ? tr(`trained on ${nn.model.meta?.split?.train?.length ?? 'many'} cities · from ${nn.source}`,
-                          `entrenada en ${nn.model.meta?.split?.train?.length ?? 'muchas'} ciudades · desde ${nn.source}`)
+                          `entrenada en ${nn.model.meta?.split?.train?.length ?? 'muchas'} ciudades · desde ${nn.source}`,
+                          `trajnuar në ${nn.model.meta?.split?.train?.length ?? 'shumë'} qytete · nga ${tr(nn.source)}`)
                 : tr('could not be loaded — using rule-based', 'no se pudo cargar: se usa el de reglas')}</em>
             </span>
           </label>
@@ -687,7 +692,8 @@ export default function TryCity({ cityParam = null, onCityParam }) {
           <span>
             {!city ? tr('Search for a place or pick a ready-made city.', 'Busca un lugar o elige una ciudad incluida.')
               : city.live ? tr(`${city.label}. Its streets are downloaded live from OpenStreetMap, which can take up to a minute.`,
-                               `${city.label}. Sus calles se descargan en vivo de OpenStreetMap, lo que puede tardar hasta un minuto.`)
+                               `${city.label}. Sus calles se descargan en vivo de OpenStreetMap, lo que puede tardar hasta un minuto.`,
+                               `${city.label}. Rrugët e tij shkarkohen drejtpërdrejt nga OpenStreetMap, që mund të zgjasë deri në një minutë.`)
               : tr('Ready-made: opens instantly.', 'Incluida: se abre al instante.')}
             {city && (llmOn && llm.key.trim() ? tr(' Controller: your model.', ' Controlador: tu modelo.')
               : useNeural && nn ? tr(' Controller: neural network.', ' Controlador: red neuronal.') : tr(' Controller: rule-based.', ' Controlador: por reglas.'))}
@@ -711,13 +717,16 @@ function NeuralBlurb({ nn }) {
   return (
     <>
       {tr(`A small neural network reads each junction’s queues and nudges its green split, keeping the cycle length. It was trained by evolution strategies on this same simulator across ${n ?? 'many'} cities, and loaded from ${nn?.source ?? 'the site'}.`,
-          `Una pequeña red neuronal lee las colas de cada cruce y ajusta su reparto de verde, sin cambiar la duración del ciclo. Se entrenó con estrategias evolutivas en este mismo simulador con ${n ?? 'muchas'} ciudades, y se cargó desde ${nn?.source ?? 'el sitio'}.`)}
+          `Una pequeña red neuronal lee las colas de cada cruce y ajusta su reparto de verde, sin cambiar la duración del ciclo. Se entrenó con estrategias evolutivas en este mismo simulador con ${n ?? 'muchas'} ciudades, y se cargó desde ${nn?.source ?? 'el sitio'}.`,
+          `Një rrjet i vogël neuronal lexon radhët e çdo kryqëzimi dhe rregullon ndarjen e jeshiles, pa ndryshuar gjatësinë e ciklit. U trajnua me strategji evolutive në këtë simulator në ${n ?? 'shumë'} qytete, dhe u ngarkua nga ${nn?.source ? tr(nn.source) : 'faqja'}.`)}
       {t && tr(` On ${t.cities} cities it never saw in training, time stopped changed by ${pct(t.nn_stopped_mean)}, against ${pct(t.rule_stopped_mean)} for the rule-based controller.`,
-               ` En ${t.cities} ciudades que nunca vio al entrenar, el tiempo detenido cambió un ${pct(t.nn_stopped_mean)}, frente a ${pct(t.rule_stopped_mean)} del controlador por reglas.`)}
+               ` En ${t.cities} ciudades que nunca vio al entrenar, el tiempo detenido cambió un ${pct(t.nn_stopped_mean)}, frente a ${pct(t.rule_stopped_mean)} del controlador por reglas.`,
+               ` Në ${t.cities} qytete që nuk i pa gjatë trajnimit, koha e ndalimit ndryshoi ${pct(t.nn_stopped_mean)}, krahasuar me ${pct(t.rule_stopped_mean)} të kontrolluesit me rregulla.`)}
       {meta?.extra_tests?.latam && (() => {
         const l = meta.extra_tests.latam.summary
         return tr(` On ${l.cities} Latin American cities added after training: ${pct(l.nn_stopped_mean)} (rule-based ${pct(l.rule_stopped_mean)}), better in ${l.nn_beats_rule_cities} of ${l.cities}.`,
-                  ` En ${l.cities} ciudades latinoamericanas añadidas después del entrenamiento: ${pct(l.nn_stopped_mean)} (por reglas ${pct(l.rule_stopped_mean)}), mejor en ${l.nn_beats_rule_cities} de ${l.cities}.`)
+                  ` En ${l.cities} ciudades latinoamericanas añadidas después del entrenamiento: ${pct(l.nn_stopped_mean)} (por reglas ${pct(l.rule_stopped_mean)}), mejor en ${l.nn_beats_rule_cities} de ${l.cities}.`,
+                  ` Në ${l.cities} qytete të Amerikës Latine të shtuara pas trajnimit: ${pct(l.nn_stopped_mean)} (me rregulla ${pct(l.rule_stopped_mean)}), më mirë në ${l.nn_beats_rule_cities} nga ${l.cities}.`)
       })()}
     </>
   )
@@ -774,7 +783,7 @@ function KeyCard({ title, what, cfg, onChange }) {
       <p className="try-key-foot">
         {state === 'ok' && <span className="ok">✓ {tr('The key works', 'La clave funciona')}</span>}
         {state === 'bad' && <span className="bad">✗ {tr('This key could not be used', 'No se pudo usar esta clave')}</span>}
-        {!state && <a href={p.keys} target="_blank" rel="noopener noreferrer">{tr(`Get a ${p.label} key ↗`, `Consigue una clave de ${p.label} ↗`)}</a>}
+        {!state && <a href={p.keys} target="_blank" rel="noopener noreferrer">{tr(`Get a ${p.label} key ↗`, `Consigue una clave de ${p.label} ↗`, `Merr një çelës ${p.label} ↗`)}</a>}
       </p>
     </div>
   )

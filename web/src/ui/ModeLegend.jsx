@@ -8,6 +8,7 @@
  * wheels, a share almost no other European city approaches. A "Barcelona
  * traffic" model without them is a model of somewhere else.
  */
+import { useT } from '../i18n'
 
 const MODES = [
   { key: 'running', label: 'On street', swatch: null, total: true },
@@ -18,6 +19,7 @@ const MODES = [
 ]
 
 export default function ModeLegend({ header }) {
+  const tr = useT()
   const m = header?.twins?.ai?.metrics
   if (!m) return null
 
@@ -45,7 +47,7 @@ export default function ModeLegend({ header }) {
   return (
     <section className="glass panel modes">
       <header className="panel-head">
-        <h2>On street</h2>
+        <h2>{tr('On street')}</h2>
         <span className="panel-sub value">{total.toLocaleString()}</span>
       </header>
 
@@ -53,7 +55,7 @@ export default function ModeLegend({ header }) {
         {rows.map((r) => (
           <div key={r.label} className="mode-row">
             <span className="mode-swatch" style={{ background: r.swatch }} />
-            <span className="mode-label">{r.label}</span>
+            <span className="mode-label">{tr(r.label)}</span>
             <span className="mode-bar">
               <i
                 style={{
@@ -69,7 +71,7 @@ export default function ModeLegend({ header }) {
 
       <div className="mode-queued">
         <span className="mode-swatch" style={{ background: 'var(--aturat)' }} />
-        <span className="mode-label">Queued right now</span>
+        <span className="mode-label">{tr('Queued right now')}</span>
         <span className="mode-count value queued">
           {(m.halting || 0).toLocaleString()}
         </span>

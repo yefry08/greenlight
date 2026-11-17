@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useT } from '../i18n'
 
 const HOME = { center: [2.1655, 41.3925], zoom: 15.1, pitch: 66, bearing: -18 }
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3)
@@ -12,6 +13,7 @@ const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3)
  * and because a rotated map with no way back to north is a trap.
  */
 export default function CameraControls({ map }) {
+  const tr = useT()
   const [bearing, setBearing] = useState(0)
   const [pitch, setPitch] = useState(0)
 
@@ -34,8 +36,8 @@ export default function CameraControls({ map }) {
       <div className="glass ctrl-group">
         <button
           className="ctrl"
-          title="Zoom in"
-          aria-label="Zoom in"
+          title={tr('Zoom in')}
+          aria-label={tr('Zoom in')}
           onClick={() => map.zoomIn({ duration: 300 })}
         >
           <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
@@ -46,8 +48,8 @@ export default function CameraControls({ map }) {
         <span className="ctrl-sep" />
         <button
           className="ctrl"
-          title="Zoom out"
-          aria-label="Zoom out"
+          title={tr('Zoom out')}
+          aria-label={tr('Zoom out')}
           onClick={() => map.zoomOut({ duration: 300 })}
         >
           <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
@@ -61,7 +63,7 @@ export default function CameraControls({ map }) {
         <button
           className="ctrl"
           title={`Bearing ${Math.round(((bearing % 360) + 360) % 360)}° — click for north`}
-          aria-label="Reset bearing to north"
+          aria-label={tr('Reset bearing to north')}
           onClick={() => map.easeTo({ bearing: 0, duration: 500, easing: easeOutCubic })}
         >
           <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"
@@ -77,8 +79,8 @@ export default function CameraControls({ map }) {
         <span className="ctrl-sep" />
         <button
           className={`ctrl ${flat ? '' : 'on'}`}
-          title={flat ? 'Tilt into 3D' : 'Flatten to overhead'}
-          aria-label="Toggle tilt"
+          title={flat ? tr('Tilt into 3D') : tr('Flatten to overhead')}
+          aria-label={tr('Toggle tilt')}
           onClick={() =>
             map.easeTo({ pitch: flat ? 66 : 0, duration: 600, easing: easeOutCubic })
           }
@@ -90,8 +92,8 @@ export default function CameraControls({ map }) {
       <div className="glass ctrl-group">
         <button
           className="ctrl"
-          title="Return to the Eixample"
-          aria-label="Return to start"
+          title={tr('Return to the Eixample')}
+          aria-label={tr('Return to start')}
           onClick={() => map.flyTo({ ...HOME, duration: 1400, curve: 1.5, essential: true })}
         >
           <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">

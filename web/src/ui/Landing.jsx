@@ -34,15 +34,17 @@ const ANY_CITY = { cities: 37, improved: 24, meanStopped: -16 }
 const SCENE_CITIES = [
   {
     key: 'home', scene: 'barcelona', name: 'Barcelona', dir: 'replay',
-    where: ['Eixample, Spain', 'Eixample, España'],
+    where: ['Eixample, Spain', 'Eixample, España', 'Eixample, Spanjë'],
     blurb: ['Cerdà’s grid of chamfered blocks: 3,230 signalised approaches, with traffic demand shaped by the city’s own published traffic data.',
-            'La cuadrícula de Cerdà con sus manzanas achaflanadas: 3.230 accesos con semáforo y una demanda de tráfico basada en los datos que publica la propia ciudad.'],
+            'La cuadrícula de Cerdà con sus manzanas achaflanadas: 3.230 accesos con semáforo y una demanda de tráfico basada en los datos que publica la propia ciudad.',
+            'Rrjeti i Cerdà-s me blloqe me qoshe të prera: 3.230 hyrje me semaforë, me kërkesë trafiku sipas të dhënave që publikon vetë qyteti.'],
   },
   {
     key: 'manhattan', scene: 'manhattan', name: 'Manhattan', dir: 'replay_manhattan',
-    where: ['Midtown, New York', 'Midtown, Nueva York'],
+    where: ['Midtown, New York', 'Midtown, Nueva York', 'Midtown, Nju Jork'],
     blurb: ['A near-perfect grid with avenue-length green waves, the textbook case for signal coordination. 5,598 buildings at surveyed height.',
-            'Una cuadrícula casi perfecta con olas verdes a lo largo de las avenidas, el caso de manual de coordinación semafórica. 5.598 edificios con su altura medida.'],
+            'Una cuadrícula casi perfecta con olas verdes a lo largo de las avenidas, el caso de manual de coordinación semafórica. 5.598 edificios con su altura medida.',
+            'Një rrjet pothuajse i përsosur me valë jeshile përgjatë avenyve, shembulli klasik i koordinimit të semaforëve. 5.598 ndërtesa me lartësi të matur.'],
   },
 ]
 
@@ -96,7 +98,7 @@ function CityCard({ city, onTab }) {
         </dl>
       )}
       <button className="land-btn" onClick={() => onTab(city.key)}>
-        {tr(`Watch ${city.name} in 3D →`, `Ver ${city.name} en 3D →`)}
+        {tr(`Watch ${city.name} in 3D →`, `Ver ${city.name} en 3D →`, `Shiko ${city.name} në 3D →`)}
       </button>
     </article>
   )
@@ -141,7 +143,8 @@ function AnyCityCard({ onTab }) {
       )}
       <p className="land-card-note">
         {t ? tr(`Neural controller on ${t.cities} cities it never saw in training, against fixed timing.`,
-                `Controlador neuronal en ${t.cities} ciudades que nunca vio al entrenar, frente al horario fijo.`)
+                `Controlador neuronal en ${t.cities} ciudades que nunca vio al entrenar, frente al horario fijo.`,
+                `Kontrolluesi neuronal në ${t.cities} qytete që nuk i pa gjatë trajnimit, krahasuar me orarin fiks.`)
           : nn === undefined ? tr('Loading the neural controller’s results…', 'Cargando los resultados del controlador neuronal…')
           : tr('Rule-based controller, 37 cities.', 'Controlador por reglas, 37 ciudades.')}
       </p>

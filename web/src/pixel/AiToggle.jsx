@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useT } from '../i18n'
 
 /**
  * Baseline / AI switch, plus the before-and-after it implies.
@@ -24,6 +25,7 @@ const POLL_MS = 2500
 const REPLAY_ONLY = import.meta.env?.VITE_REPLAY_ONLY === '1'
 
 export default function AiToggle({ onFocusChange, compact = false }) {
+  const tr = useT()
   const [focus, setFocus] = useState('ai')
   const [twins, setTwins] = useState(null)
   const [busy, setBusy] = useState(false)
@@ -98,7 +100,7 @@ export default function AiToggle({ onFocusChange, compact = false }) {
 
   return (
     <div className={`ai-toggle glass ${compact ? "compact" : ""}`}>
-      <div className="ai-switch" role="group" aria-label="Signal control">
+      <div className="ai-switch" role="group" aria-label={tr('Signal control', null, 'Kontrolli i semaforëve')}>
         {['baseline', 'ai'].map((k) => (
           <button
             key={k}
@@ -106,15 +108,17 @@ export default function AiToggle({ onFocusChange, compact = false }) {
             onClick={() => choose(k)}
             disabled={busy}
           >
-            {k === 'ai' ? 'AI-adaptive' : 'Fixed-time'}
+            {k === 'ai' ? tr('AI-adaptive', null, 'Adaptiv me IA') : tr('Fixed-time', null, 'Orar fiks')}
           </button>
         ))}
       </div>
 
       <div className="ai-note">
         {REPLAY_ONLY
-          ? 'Two pre-recorded twins on identical demand. This switches which recording plays; nothing is being decided live.'
-          : 'Both twins run continuously on identical demand. This switches which one the map draws.'}
+          ? tr('Two pre-recorded twins on identical demand. This switches which recording plays; nothing is being decided live.', null,
+               'Dy binjakë të regjistruar me të njëjtën kërkesë. Ky çelës ndryshon cila regjistrim luhet; asgjë nuk vendoset drejtpërdrejt.')
+          : tr('Both twins run continuously on identical demand. This switches which one the map draws.', null,
+               'Të dy binjakët punojnë pa ndërprerje me të njëjtën kërkesë. Ky çelës ndryshon cilin vizaton harta.')}
       </div>
 
       {twins && !compact ? (

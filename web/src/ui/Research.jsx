@@ -22,46 +22,43 @@
  */
 
 import { assetUrl } from '../data/assetUrl'
+import { useT } from '../i18n'
 
-const PRECEDENTS = [
+const precedents = (tr) => [
   {
     name: 'Simile',
-    kind: 'Platform',
-    what: 'An AI-powered human population simulation platform for market research ' +
-          'and social science, validated weekly against thousands of real-world ' +
-          'evaluations.',
-    why: 'A success case for AI agent simulation at scale, held to continuous ' +
-         'real-world validation rather than to a benchmark alone.',
+    kind: tr('Platform', null, 'Platformë'),
+    what: tr('An AI-powered human population simulation platform for market research and social science, validated weekly against thousands of real-world evaluations.', null,
+             'Një platformë me IA që simulon popullsi njerëzore për kërkime tregu dhe shkenca sociale, e verifikuar çdo javë me mijëra vlerësime reale.'),
+    why: tr('A success case for AI agent simulation at scale, held to continuous real-world validation rather than to a benchmark alone.', null,
+            'Një rast suksesi i simulimit me agjentë IA në shkallë të gjerë, i verifikuar vazhdimisht me botën reale dhe jo vetëm me një test.'),
     href: 'https://www.simile.com',
   },
   {
     name: 'MAWM — Multilingual Agent-based World Modeling',
-    kind: 'Research framework · COLM 2026',
-    what: 'Simulates multilingual societies with generative agents to study ' +
-          'opinion dynamics and how information diffuses across cultures.',
-    why: 'World-modeling with AI agents pointed at a complex social phenomenon, ' +
-         'where the behaviour of interest emerges from the population rather ' +
-         'than being scripted.',
+    kind: tr('Research framework · COLM 2026', null, 'Kuadër kërkimor · COLM 2026'),
+    what: tr('Simulates multilingual societies with generative agents to study opinion dynamics and how information diffuses across cultures.', null,
+             'Simulon shoqëri shumëgjuhëshe me agjentë gjenerues për të studiuar dinamikën e opinioneve dhe si përhapet informacioni mes kulturave.'),
+    why: tr('World-modeling with AI agents pointed at a complex social phenomenon, where the behaviour of interest emerges from the population rather than being scripted.', null,
+            'Modelim i botës me agjentë IA për një dukuri komplekse shoqërore, ku sjellja që na intereson lind nga popullsia në vend që të jetë e programuar.'),
     href: null,
   },
   {
     name: 'MicroVerse / MatrAIx',
-    kind: 'Experiment',
-    what: 'Measures "identity drift" in AI agents across long-running simulations ' +
-          'under resource scarcity.',
-    why: 'The one on this list that is a caution rather than an encouragement. ' +
-         'Anything orchestrating a city runs continuously for days, and an ' +
-         'autonomous agent that drifts over time is a failure mode a traffic ' +
-         'controller cannot afford.',
+    kind: tr('Experiment', null, 'Eksperiment'),
+    what: tr('Measures "identity drift" in AI agents across long-running simulations under resource scarcity.', null,
+             'Mat “zhvendosjen e identitetit” te agjentët IA në simulime të gjata me burime të pakta.'),
+    why: tr('The one on this list that is a caution rather than an encouragement. Anything orchestrating a city runs continuously for days, and an autonomous agent that drifts over time is a failure mode a traffic controller cannot afford.', null,
+            'I vetmi në këtë listë që është paralajmërim dhe jo inkurajim. Çdo gjë që drejton një qytet punon pa ndërprerje për ditë, dhe një agjent autonom që zhvendoset me kohën është një dështim që një kontrollues trafiku nuk e përballon dot.'),
     href: null,
   },
   {
-    name: 'Generative agent societies',
-    kind: 'Research lineage',
-    what: "Stanford's Generative Agents (\"Smallville\") and the body of work " +
-          'since on simulating societies with language models.',
-    why: 'The lineage that made it credible to model a complex urban system ' +
-         'with agents at all, rather than only with equations.',
+    name: tr('Generative agent societies', null, 'Shoqëri agjentësh gjenerues'),
+    kind: tr('Research lineage', null, 'Linjë kërkimore'),
+    what: tr('Stanford’s Generative Agents (“Smallville”) and the body of work since on simulating societies with language models.', null,
+             'Generative Agents i Stanfordit (“Smallville”) dhe puna e mëpasshme për simulimin e shoqërive me modele gjuhësore.'),
+    why: tr('The lineage that made it credible to model a complex urban system with agents at all, rather than only with equations.', null,
+            'Linja që e bëri të besueshëm modelimin e një sistemi kompleks urban me agjentë, e jo vetëm me ekuacione.'),
     href: 'https://arxiv.org/abs/2304.03442',
   },
 ]
@@ -74,21 +71,21 @@ const PRECEDENTS = [
  * is ours and the cards are not.
  */
 export default function Research() {
+  const tr = useT()
   return (
     <section className="research">
       <div className="research-top">
         <header className="research-head">
-          <p className="research-eyebrow">Research</p>
-          <h1>Precedent, not architecture</h1>
+          <p className="research-eyebrow">{tr('Research')}</p>
+          <h1>{tr('Precedent, not architecture', null, 'Precedent, jo arkitekturë')}</h1>
           <p className="research-lede">
-            Work that shows large-scale AI agent simulation is an active and
-            validated field. It is cited here as inspiration and context.
+            {tr('Work that shows large-scale AI agent simulation is an active and validated field. It is cited here as inspiration and context.', null,
+                'Punë që tregon se simulimi me agjentë IA në shkallë të gjerë është një fushë aktive dhe e verifikuar. Citohet këtu si frymëzim dhe kontekst.')}
           </p>
           <p className="research-disclaimer glass">
-            <strong>None of this is used by Greenlight AI.</strong> This project runs
-            SUMO with a rule-based adaptive signal controller, and shares no code,
-            models or technical architecture with the work below. These are
-            references that shaped how the problem was framed — nothing more.
+            <strong>{tr('None of this is used by Greenlight AI.', null, 'Asgjë nga këto nuk përdoret nga Greenlight AI.')}</strong>{' '}
+            {tr('This project runs SUMO with a rule-based adaptive signal controller, and shares no code, models or technical architecture with the work below. These are references that shaped how the problem was framed — nothing more.', null,
+                'Ky projekt përdor SUMO me një kontrollues adaptiv semaforësh me rregulla, dhe nuk ndan kod, modele apo arkitekturë teknike me punën më poshtë. Janë referenca që ndihmuan të formulohej problemi — asgjë më shumë.')}
           </p>
         </header>
 
@@ -111,29 +108,23 @@ export default function Research() {
             decoding="async"
           />
           <figcaption>
-            <h3>AI Traffic Orchestration — Technical Pipeline</h3>
+            <h3>{tr('AI Traffic Orchestration — Technical Pipeline', null, 'Orkestrimi i trafikut me IA — rrjedha teknike')}</h3>
             <p>
-              Greenlight AI's own pipeline, as designed. Running today:
-              Barcelona, Shibuya and Midtown Manhattan have full SUMO networks
-              and recorded twins — <b>+41.1%</b>, <b>+36.0%</b> and{' '}
-              <b>+34.6%</b> network speed against fixed-time control. The
-              remaining districts have illustrated basemaps only. Demand is a
-              calibrated synthetic profile rather than a live municipal feed,
-              and the road graph is built by netconvert from OSM, with
-              city2graph supplying the transit layer.
+              {tr('Greenlight AI’s own pipeline, as designed. Running today: Barcelona, Shibuya and Midtown Manhattan have full SUMO networks and recorded twins — +41.1%, +36.0% and +34.6% network speed against fixed-time control. The remaining districts have illustrated basemaps only. Demand is a calibrated synthetic profile rather than a live municipal feed, and the road graph is built by netconvert from OSM, with city2graph supplying the transit layer.', null,
+                  'Rrjedha e vetë Greenlight AI, siç është projektuar. Funksionon sot: Barcelona, Shibuya dhe Midtown Manhattan kanë rrjete të plota SUMO dhe binjakë të regjistruar — +41,1%, +36,0% dhe +34,6% shpejtësi rrjeti krahasuar me orarin fiks. Lagjet e tjera kanë vetëm harta bazë të ilustruara. Kërkesa është një profil sintetik i kalibruar, jo të dhëna të drejtpërdrejta bashkiake, dhe grafi i rrugëve ndërtohet me netconvert nga OSM, me city2graph për shtresën e transportit.')}
             </p>
           </figcaption>
         </figure>
       </div>
 
       <ul className="research-grid">
-        {PRECEDENTS.map((p) => (
+        {precedents(tr).map((p) => (
           <li className="research-card glass" key={p.name}>
             <div className="research-kind">{p.kind}</div>
             <h2 className="research-name">{p.name}</h2>
             <p className="research-what">{p.what}</p>
             <p className="research-why">
-              <span className="research-why-label">Why it is here</span>
+              <span className="research-why-label">{tr('Why it is here', null, 'Pse është këtu')}</span>
               {p.why}
             </p>
             {p.href ? (
@@ -144,16 +135,15 @@ export default function Research() {
             ) : (
               // Deliberately visible. A missing link that looks missing gets
               // filled in; an invented one that looks plausible never does.
-              <span className="research-link missing">Link to add</span>
+              <span className="research-link missing">{tr('Link to add', null, 'Lidhje për t’u shtuar')}</span>
             )}
           </li>
         ))}
       </ul>
 
       <p className="research-foot">
-        Greenlight AI compares two SUMO simulations of Barcelona running identical
-        demand, differing only in who controls the traffic lights. The agent work
-        above informs how that question is framed; it does not run underneath it.
+        {tr('Greenlight AI compares two SUMO simulations of Barcelona running identical demand, differing only in who controls the traffic lights. The agent work above informs how that question is framed; it does not run underneath it.', null,
+            'Greenlight AI krahason dy simulime SUMO të Barcelonës me të njëjtën kërkesë, që ndryshojnë vetëm te kush drejton semaforët. Puna me agjentë më lart ndikon në mënyrën si shtrohet pyetja; nuk funksionon nën të.')}
       </p>
 
     </section>

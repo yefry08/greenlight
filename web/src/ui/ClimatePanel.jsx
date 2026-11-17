@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useT } from '../i18n'
 
 /**
  * Climate impact of the AI control layer.
@@ -36,6 +37,7 @@ const FLOW = [
 ]
 
 function SplitMeter({ label, unit, base, ai, d }) {
+  const tr = useT()
   const hasData = base > 0 || ai > 0
   const max = Math.max(base || 0, ai || 0, 1e-9)
   const basePct = ((base || 0) / max) * 100
@@ -68,7 +70,7 @@ function SplitMeter({ label, unit, base, ai, d }) {
 
       <div className="meter-foot">
         <span className="value base">{fmt(base, d)}</span>
-        <span className="meter-legend">fixed · AI</span>
+        <span className="meter-legend">{tr('fixed · AI')}</span>
         <span className="value ai">{fmt(ai, d)}</span>
       </div>
     </div>
@@ -76,6 +78,7 @@ function SplitMeter({ label, unit, base, ai, d }) {
 }
 
 export default function ClimatePanel({ header }) {
+  const tr = useT()
   const [open, setOpen] = useState(true)
   const twins = header?.twins || {}
   const b = twins.baseline?.metrics
@@ -92,7 +95,7 @@ export default function ClimatePanel({ header }) {
   return (
     <section className={`glass panel climate ${open ? '' : 'collapsed'}`}>
       <header className="panel-head" onClick={() => setOpen((v) => !v)}>
-        <h2>Climate impact</h2>
+        <h2>{tr('Climate impact')}</h2>
         <span className="panel-toggle">{open ? '–' : '+'}</span>
       </header>
 
@@ -128,7 +131,7 @@ export default function ClimatePanel({ header }) {
             {CLIMATE.map((m) => (
               <SplitMeter
                 key={m.key}
-                label={m.label}
+                label={tr(m.label)}
                 unit={m.unit}
                 d={m.d}
                 base={b[m.key]}
@@ -143,7 +146,7 @@ export default function ClimatePanel({ header }) {
             {FLOW.map((m) => (
               <SplitMeter
                 key={m.key}
-                label={m.label}
+                label={tr(m.label)}
                 unit={m.unit}
                 d={m.d}
                 base={b[m.key]}
