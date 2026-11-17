@@ -10,6 +10,9 @@ Built for the **GenAI for Good Challenge: Cities Edition** (UNDP / IEEE),
 Pristina's *Transit Route Planning* use case. The site is in English and
 Albanian.
 
+**Live: https://greenlight-ruddy.vercel.app** · Pristina's review map:
+[#/transit/pristina](https://greenlight-ruddy.vercel.app/#/transit/pristina)
+
 ---
 
 ## What it does
